@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('lastname');
             $table->integer('identification');
             $table->string('address');
+            $table->string('country');
             $table->string('city');
             $table->string('number');
             $table->integer('administrator');

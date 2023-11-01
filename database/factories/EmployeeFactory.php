@@ -21,6 +21,7 @@ class EmployeeFactory extends Factory
                 'name' => fake()->firstName(),
                 'lastname' => fake()->lastName(),
                 'identification' => fake()->numberBetween(100000,199999),
+                'country' => fake()->country(),
                 'city' => fake()->city(),
                 'number' => fake()->phoneNumber(),
                 'address' => fake()->address(), 
