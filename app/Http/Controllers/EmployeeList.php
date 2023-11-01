@@ -32,6 +32,7 @@ class EmployeeList extends Controller
         $employee->name = $request->name;
         $employee->lastname = $request->lastname;
         $employee->identification = $request->identification;
+        $employee->country = $request->country;
         $employee->address = $request->address;
         $employee->city = $request->city;
         $employee->number = $request->number;
@@ -54,18 +55,24 @@ class EmployeeList extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $employee = Employee::findOrfail($request->id);
+        if ($request->isMethod('PUT'))
+        {
+            $employee = Employee::findOrfail($request->input("id"));
+            
+            $employee->name = $request->input("name");
+            $employee->lastname = $request->input("lastname");
+            $employee->identification = $request->input("identification");
+            $employee->address = $request->input("address");
+            $employee->country = $request->input("country");
+            $employee->city = $request->input("city");
+            $employee->number = $request->input("number");
+            $employee->administrator = $request->input("administrator");
+            $employee->save();
 
-        $employee->name = $request->name;
-        $employee->lastname = $request->lastname;
-        $employee->identification = $request->identification;
-        $employee->address = $request->address;
-        $employee->city = $request->city;
-        $employee->number = $request->number;
-        $employee->administrator = $request->administrator;
+            return $employee;
+        }
         
-        $employee->save();
-        return $employee;
+        
     }
 
     /**
