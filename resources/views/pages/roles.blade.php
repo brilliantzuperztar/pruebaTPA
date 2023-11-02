@@ -280,7 +280,7 @@
     function createPosition()
     {
         $(document).ready(function(){
-        var url = 'http://127.0.0.1:8000/api/position/';
+        var url = 'https://typical-pipe-production.up.railway.app/api/position/';
         var employee = $('input[name="idPosition"]').val();
         var value = employee;
         console.log({
@@ -321,7 +321,7 @@
     function deletePosition()
     {
         $(document).ready(function(){
-        var url = 'http://127.0.0.1:8000/api/positions/';
+        var url = 'https://typical-pipe-production.up.railway.app/api/positions/';
         var employee = $('input[name="idPosition"]').val();
         var value = employee;        
 
@@ -349,7 +349,7 @@
     function updatePosition()
     {
         $(document).ready(function(){
-        var url = 'http://127.0.0.1:8000/api/positions/';
+        var url = 'https://typical-pipe-production.up.railway.app/api/positions/';
         var employee = $('input[name="idPosition"]').val();
         var value = employee;
         console.log({

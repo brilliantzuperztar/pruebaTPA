@@ -327,7 +327,7 @@
     function registerEmployee()
     {
         $(document).ready(function(){
-        var url = 'http://127.0.0.1:8000/api/employee';
+        var url = 'https://typical-pipe-production.up.railway.app/api/employee';
         var employee = $('input[name="idEmployee"]').val();
         var value = employee;
 
@@ -382,7 +382,7 @@
     function deleteEmployee()
     {
         $(document).ready(function(){
-        var url = 'http://127.0.0.1:8000/api/employees/';
+        var url = 'https://typical-pipe-production.up.railway.app/api/employees/';
         var employee = $('input[name="idEmployee"]').val();
         var value = employee;
 
@@ -416,7 +416,7 @@
     function updateEmployee()
     {
         $(document).ready(function(){
-        var url = 'http://127.0.0.1:8000/api/employees/';
+        var url = 'https://typical-pipe-production.up.railway.app/api/employees/';
         var employee = $('input[name="idEmployee"]').val();
         var value = employee;
 
