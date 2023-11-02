@@ -177,7 +177,7 @@
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <input type="submit"  value="Guardar" class="btn btn-primary" onclick="updateEmployee()">
+                              <input type="submit"  id="btn_submit" value="Guardar" class="btn btn-primary" onclick="updateEmployee()">
                             </div>
                           </div>
                         </div>
@@ -201,7 +201,7 @@
                             <input type="hidden" name="idEmployee" value="{{$information->id}}" />
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary" onclick="deleteEmployee()">Confirmar</button>
+                              <button type="button" id="btn_submit" class="btn btn-primary" onclick="deleteEmployee()">Confirmar</button>
                             </div>
                           </div>
                         </div>
@@ -397,7 +397,7 @@
             success: function(response) {
                 var result = ''; 
                 $('div#message').append(result);
-                $('#submit').attr('disabled', true);
+                $("#btn_submit").css('visibility', 'hidden');
                 
                 setTimeout(function(){
                 window.location.reload();
@@ -444,7 +444,7 @@
             success: function(response) {
                 var result = '<p class=text-success> Actualización exitosa. </p> <img src="images/gif/reloading.gif" alt="reloading" width="30" height="30" >'; 
                 $('div#message').append(result);
-                $('#submit').attr('disabled', true);
+                $("#btn_submit").css('visibility', 'hidden');
                 
                 setTimeout(function(){
                 window.location.reload();
