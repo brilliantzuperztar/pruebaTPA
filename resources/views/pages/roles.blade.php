@@ -215,7 +215,6 @@
                                                   <label class="col-sm-3 col-form-label">Cargo</label>
                                                   <div class="col-sm-9">
                                                     <select class="form-control" id="infoPositionR" name="infoPositionR" multiple>
-                                                        <option value="{{$information->position->pos_name}}" disabled>{{$information->position->pos_name}}</option>
                                                         @foreach($positions as $pos_name)
                                                         <option value="{{$pos_name->position->id}}" label="{{$pos_name->position->pos_name}}">{{$pos_name->position->pos_name}}</option>
                                                         @endforeach
@@ -241,7 +240,6 @@
                                                   <label class="col-sm-3 col-form-label">Jefe</label>
                                                   <div class="col-sm-9">
                                                     <select class="form-control" id="infoLeaderR" name="infoLeaderR" multiple>
-                                                        <option value="{{$information->id_leader}}" disabled>{{$information->leader->name}} {{$information->employee->lastname}}</option>
                                                         @foreach($positions as $id_leader)
                                                         <option value="{{$id_leader->id_leader}}" label="{{$id_leader->$id_leader}}">{{$id_leader->leader->name}} {{$id_leader->employee->lastname}}</option>
                                                         @endforeach
