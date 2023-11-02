@@ -19,7 +19,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="template/css/vertical-layout-light/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon" href="template/images/favicon.png" />
+  <link rel="shortcut icon" href="images/icons/psicoalianza.svg" />
 </head>
 <body>
 
