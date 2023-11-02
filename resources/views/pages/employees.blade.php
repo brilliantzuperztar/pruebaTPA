@@ -182,7 +182,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="modal fade" id="deleteEmployee{{$information->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="deleteEmployee{{$information->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -198,6 +198,7 @@
                                   </blockquote>
                             </div>
                             <div id="message" style="text-align:center"></div>
+                            <input type="hidden" name="idEmployee" value="{{$information->id}}" />
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                               <button type="button" class="btn btn-primary" onclick="deleteEmployee()">Confirmar</button>
@@ -291,7 +292,6 @@
                                                 </div>
                                               </div>
                                           </div>
-                                          <div id="message" style="text-align:center"></div>
                                         </form>
                                       </div>
                                     </div>
