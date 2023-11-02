@@ -65,7 +65,7 @@
                       <td><button type="button" name="edit" class="btn btn-primary" data-toggle="modal" data-id="{{$information->id}}" data-target="#updatePosition{{$information->id}}" >Actualizar</button>
                       <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deletePosition{{$information->id}}">Eliminar</button></td>
                     </tr>
-                    <div class="modal fade" id="updatePosition{{$information->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="updatePosition{{$information->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-xl" role="document">
                           <div class="modal-content">
                             <div class="modal-body">
@@ -110,8 +110,9 @@
                                                   <div class="col-sm-9">
                                                     <select class="form-control" id="infoPosition" name="infoPosition">
                                                         <option value="{{$information->position->pos_name}}" disabled>{{$information->position->pos_name}}</option>
+    
                                                         @foreach($positions as $pos_name)
-                                                        <option value="{{$pos_name->position->id}}" label="{{$pos_name->position->pos_name}}">{{$pos_name->position->pos_name}}</option>
+                                                            <option value="{{$pos_name->position->id}}" label="{{$pos_name->position->pos_name}}">{{$pos_name->position->pos_name}}</option>   
                                                         @endforeach
                                                     </select>
                                                   </div>
@@ -136,9 +137,9 @@
                                                   <label class="col-sm-3 col-form-label">Jefe</label>
                                                   <div class="col-sm-9">
                                                     <select class="form-control" id="infoLeader" name="infoLeader" multiple>
-                                                        <option value="{{$information->id_leader}}" disabled>{{$information->leader->name}} {{$information->employee->lastname}}</option>
+                                                        <option value="{{$information->id_leader}}" disabled>{{$information->leader->name}} {{$information->leader->lastname}}</option>
                                                         @foreach($positions as $id_leader)
-                                                        <option value="{{$id_leader->id_leader}}" label="{{$id_leader->$id_leader}}">{{$id_leader->leader->name}} {{$id_leader->employee->lastname}}</option>
+                                                        <option value="{{$id_leader->id_leader}}" label="{{$id_leader->$id_leader}}">{{$id_leader->leader->name}} {{$id_leader->leader->lastname}}</option>
                                                         @endforeach
                                                       </select>
                                                   </div>
@@ -154,12 +155,12 @@
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                              <input type="submit" id="submit" value="Guardar" class="btn btn-primary" onclick="updatePosition()">
+                              <input type="submit" id="btn_submit" value="Guardar" class="btn btn-primary" onclick="updatePosition()">
                             </div>
                           </div>
                         </div>
                     </div>
-                    <div class="modal fade" id="deletePosition{{$information->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="deletePosition{{$information->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -178,13 +179,13 @@
                             <input type="hidden" name="idPosition" value="{{$information->id}}" />
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary" onclick="deletePosition()">Confirmar</button>
+                              <button type="button" id="btn_submit" class="btn btn-primary" onclick="deletePosition()">Confirmar</button>
                             </div>
                           </div>
                         </div>
                     </div>
                     @endforeach
-                    <div class="modal fade" id="registerPosition" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="registerPosition" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-xl" role="document">
                           <div class="modal-content">
                             <div class="modal-body">
@@ -257,7 +258,7 @@
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <input type="submit"  value="Guardar" class="btn btn-primary" onclick="createPosition()">
+                              <input type="submit" id="btn_submit" value="Guardar" class="btn btn-primary" onclick="createPosition()">
                             </div>
                           </div>
                         </div>
@@ -304,6 +305,7 @@
             success: function(response) {
                 var result = '<p class=text-success> Creación exitosa. </p> <img src="images/gif/reloading.gif" alt="reloading" width="30" height="30" >'; 
                 $('div#message').append(result);
+                $("#btn_submit").css('visibility', 'hidden');
                 
                 setTimeout(function(){
                 window.location.reload();
@@ -331,7 +333,7 @@
             success: function(response) {
                 var result = '<p class=text-success> Se ha eliminado con éxito. </p> <img src="images/gif/reloading.gif" alt="reloading" width="30" height="30" >'; 
                 $('div#message').append(result);
-                $('#submit').attr('disabled', true);
+                $("#btn_submit").css('visibility', 'hidden');
                 
                 setTimeout(function(){
                 window.location.reload();
@@ -373,7 +375,7 @@
             success: function(response) {
                 var result = '<p class=text-success> Actualización exitosa. </p> <img src="images/gif/reloading.gif" alt="reloading" width="30" height="30" >'; 
                 $('div#message').append(result);
-                $('#submit').attr('disabled', true);
+                $("#btn_submit").css('visibility', 'hidden');
                 
                 setTimeout(function(){
                 window.location.reload();

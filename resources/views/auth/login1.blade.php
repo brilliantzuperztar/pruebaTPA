@@ -7,7 +7,8 @@
     <div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" method="POST" action="{{ route('login.post') }}" >
+                    @csrf
 					<div class="text-center pl-5 mb-5">
                         <a href="#!">
                           <img src="images/icons/psicoalianza.svg" alt="" width="300" height="93">
@@ -17,17 +18,15 @@
 						Inicia sesión para continuar
 					</span>
 
-					
-					
 					<div class="wrap-input100 validate-input" data-validate = "Usuario requerido">
-						<input class="input100" type="text" name="email">
+						<input class="input100" type="text" name="email" id="email" type="email">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Usuario</span>
 					</div>
 					
 					
 					<div class="wrap-input100 validate-input" data-validate="Contraseña requerida">
-						<input class="input100" type="password" name="pass">
+						<input class="input100"  id="password" type="password">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Contraseña</span>
 					</div>
@@ -49,7 +48,7 @@
 			
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button type="submit" class="login100-form-btn">
 							Iniciar Sesión
 						</button>
 					</div>

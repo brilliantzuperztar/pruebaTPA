@@ -82,7 +82,7 @@
                       <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteEmployee{{$information->id}}">Eliminar</button></td>
                       </td>               
                     </tr>
-                    <div class="modal fade" id="updateEmployee{{$information->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="updateEmployee{{$information->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-xl" role="document">
                           <div class="modal-content">
                             <div class="modal-body">
@@ -182,7 +182,7 @@
                           </div>
                         </div>
                       </div>
-                    <div class="modal fade" id="deleteEmployee{{$information->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="deleteEmployee{{$information->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -208,7 +208,7 @@
                     </div>
                       @endforeach
 
-                    <div class="modal fade" id="registerEmployee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="registerEmployee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-xl" role="document">
                           <div class="modal-content">
                             <div class="modal-body">
@@ -300,7 +300,7 @@
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <input type="submit"  value="Guardar" class="btn btn-primary" onclick="registerEmployee()">
+                              <input type="submit" id="btn_submit"  value="Guardar" class="btn btn-primary" onclick="registerEmployee()">
                             </div>
                           </div>
                         </div>
@@ -362,7 +362,7 @@
             success: function(response) {
                 var result = '<p class=text-success> Registro exitoso! </p> <img src="images/gif/reloading.gif" alt="reloading" width="30" height="30" >'; 
                 $('div#message').append(result);
-                $('#submit').attr('disabled', true);
+                $("#btn_submit").css('visibility', 'hidden');
                 
                 setTimeout(function(){
                 window.location.reload();
