@@ -14,6 +14,10 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
+    <link rel="preload" as="style" href="https://typical-pipe-production.up.railway.app/build/assets/app-041e359a.css">
+    <link rel="modulepreload" href="https://typical-pipe-production.up.railway.app/build/assets/app-fc82a79e.js">
+    <link rel="stylesheet" href="https://typical-pipe-production.up.railway.app/build/assets/app-041e359a.css">
+    <script type="module" src="https://typical-pipe-production.up.railway.app/build/assets/app-fc82a79e.js"></script>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
