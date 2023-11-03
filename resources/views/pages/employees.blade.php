@@ -51,28 +51,28 @@
                     @foreach ($employees as $information)   
                     <tr>
                       <td class="py-1">
-                          {{$information->id}}
+                        @if(!empty($information->id)) {{$information->id}} @else @endif
                       </td>
                       <td>
-                          {{$information->name}}  {{$information->lastname}}
+                        @if(!empty($information->name) && !empty($information->lastname)) {{$information->name}} {{$information->lastname}} @else {{ __('Sin información') }} @endif 
                       </td>
                       <td>
-                          {{$information->identification}}
+                        @if(!empty($information->identification)) {{$information->identification}} @else {{ __('Sin información') }} @endif
                       </td>
                       <td>
-                          {{$information->country}}
+                        @if(!empty($information->country)) {{$information->country}} @else {{ __('Sin información') }} @endif
                       </td>
                       <td>
-                          {{$information->city}}
+                        @if(!empty($information->city)) {{$information->city}} @else {{ __('Sin información') }} @endif
                       </td>
                       <td>
-                          {{$information->address}}
+                        @if(!empty($information->address)) {{$information->address}} @else {{ __('Sin información') }} @endif
                       </td>
                       <td>
-                          {{$information->number}}
+                        @if(!empty($information->number)) {{$information->number}} @else {{ __('Sin información') }} @endif
                       </td>
                       <td>
-                          @if ($information->administrator === 1)
+                          @if (!empty($information->administrator) && $information->administrator === 1)
                           Sí
                           @else
                           No
@@ -99,7 +99,7 @@
                                               <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Nombre</label>
                                                 <div class="col-sm-9">
-                                                  <input type="text" class="form-control" name="infoName" value="{{$information->name}}"/>
+                                                  <input type="text" class="form-control" name="infoName{{$information->id}}" value="{{$information->name}}" required/>
                                                 </div>
                                               </div>
                                             </div>
@@ -107,7 +107,7 @@
                                               <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Apellido</label>
                                                 <div class="col-sm-9">
-                                                  <input type="text" class="form-control" name="infoLastname" value="{{$information->lastname}}"/>
+                                                  <input type="text" class="form-control" name="infoLastname{{$information->id}}" value="{{$information->lastname}}" required/>
                                                 </div>
                                               </div>
                                             </div>
@@ -117,7 +117,7 @@
                                                 <div class="form-group row">
                                                   <label class="col-sm-3 col-form-label">Identificación</label>
                                                   <div class="col-sm-9">
-                                                    <input type="text" class="form-control" name="infoId" value="{{$information->identification}}"/>
+                                                    <input type="text" class="form-control" name="infoId{{$information->id}}" value="{{$information->identification}}" required/>
                                                   </div>
                                                 </div>
                                               </div>
@@ -125,7 +125,7 @@
                                                 <div class="form-group row">
                                                   <label class="col-sm-3 col-form-label">Teléfono</label>
                                                   <div class="col-sm-9">
-                                                    <input type="text" class="form-control" name="infoNumber" value="{{$information->number}}"/>
+                                                    <input type="text" class="form-control" name="infoNumber{{$information->id}}" value="{{$information->number}}" required/>
                                                   </div>
                                                 </div>
                                               </div>
@@ -138,8 +138,8 @@
                                               <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">País</label>
                                                 <div class="col-sm-9">
-                                                  <select class="form-control" id="infoCountry" name="infoCountry" multiple>
-                                                    <option value="{{$information->country}}" disabled>{{$information->country}}</option>
+                                                  <select class="form-control" id="infoCountry{{$information->id}}" name="infoCountry{{$information->id}}" multiple required>
+                                                    <option value="{{$information->country}}" selected>{{$information->country}}</option>
                                                     <option value="Colombia" label="Colombia">Colombia</option>
                                                     <option value="USA" label="USA">USA</option>
                                                     <option value="España" label="España">España</option>
@@ -152,7 +152,7 @@
                                                 <div class="form-group row">
                                                   <label class="col-sm-3 col-form-label">Ciudad</label>
                                                   <div class="col-sm-9">
-                                                    <select class="form-control" id="infoCity" name="infoCity" multiple>
+                                                    <select class="form-control" id="infoCity{{$information->id}}" name="infoCity{{$information->id}}" multiple required>
                                                         <option disabled>Selecciona tu país primero</option>
                                                     </select>
                                                   </div>
@@ -162,14 +162,14 @@
                                                 <div class="form-group row">
                                                   <label class="col-sm-3 col-form-label">Dirección</label>
                                                   <div class="col-sm-9">
-                                                    <input type="text" class="form-control" name="infoAddress" value="{{$information->address}}"/>
+                                                    <input type="text" class="form-control" name="infoAddress{{$information->id}}" value="{{$information->address}}" required/>
                                                   </div>
                                                 </div>
                                               </div>
                                           </div>
                                           <div id="message" style="text-align:center"></div>
-                                          <input type="hidden" name="idEmployee" value="{{$information->id}}" />
-                                          <input type="hidden" name="infoAdmin" value="{{$information->administrator}}" />
+                                          <input type="hidden" name="idEmployee{{$information->id}}" value="{{$information->id}}" />
+                                          <input type="hidden" name="infoAdmin{{$information->id}}" value="{{$information->administrator}}" />
                                         </form>
                                       </div>
                                     </div>
@@ -177,7 +177,7 @@
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <input type="submit"  value="Guardar" class="btn btn-primary" onclick="updateEmployee()">
+                              <input type="submit"  id="btn_submit" value="Guardar" class="btn btn-primary" onclick="updateEmployee{{$information->id}}()">
                             </div>
                           </div>
                         </div>
@@ -198,10 +198,10 @@
                                   </blockquote>
                             </div>
                             <div id="message" style="text-align:center"></div>
-                            <input type="hidden" name="idEmployee" value="{{$information->id}}" />
+                            <input type="hidden" name="idEmployee{{$information->id}}" value="{{$information->id}}" />
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary" onclick="deleteEmployee()">Confirmar</button>
+                              <button type="button" id="btn_submit" class="btn btn-primary" onclick="deleteEmployee{{$information->id}}()">Confirmar</button>
                             </div>
                           </div>
                         </div>
@@ -225,7 +225,7 @@
                                               <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Nombre</label>
                                                 <div class="col-sm-9">
-                                                  <input type="text" class="form-control" name="infoNameR" />
+                                                  <input type="text" class="form-control" name="infoNameR" required />
                                                 </div>
                                               </div>
                                             </div>
@@ -233,7 +233,7 @@
                                               <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Apellido</label>
                                                 <div class="col-sm-9">
-                                                  <input type="text" class="form-control" name="infoLastnameR" />
+                                                  <input type="text" class="form-control" name="infoLastnameR" required />
                                                 </div>
                                               </div>
                                             </div>
@@ -243,7 +243,7 @@
                                                 <div class="form-group row">
                                                   <label class="col-sm-3 col-form-label">Identificación</label>
                                                   <div class="col-sm-9">
-                                                    <input type="text" class="form-control" name="infoIdR" />
+                                                    <input type="text" class="form-control" name="infoIdR" required />
                                                   </div>
                                                 </div>
                                               </div>
@@ -251,7 +251,7 @@
                                                 <div class="form-group row">
                                                   <label class="col-sm-3 col-form-label">Teléfono</label>
                                                   <div class="col-sm-9">
-                                                    <input type="text" class="form-control" name="infoNumberR" />
+                                                    <input type="text" class="form-control" name="infoNumberR" required />
                                                   </div>
                                                 </div>
                                               </div>
@@ -264,7 +264,7 @@
                                               <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">País</label>
                                                 <div class="col-sm-9">
-                                                  <select class="form-control" id="infoCountryR" name="infoCountryR" multiple>
+                                                  <select class="form-control" id="infoCountryR" name="infoCountryR" multiple required>
                                                     <option value="Colombia" label="Colombia">Colombia</option>
                                                     <option value="USA" label="USA">USA</option>
                                                     <option value="España" label="España">España</option>
@@ -277,7 +277,7 @@
                                                 <div class="form-group row">
                                                   <label class="col-sm-3 col-form-label">Ciudad</label>
                                                   <div class="col-sm-9">
-                                                    <select class="form-control" id="infoCityR" name="infoCityR" multiple>
+                                                    <select class="form-control" id="infoCityR" name="infoCityR" multiple required>
                                                         <option disabled>Selecciona tu país primero</option>
                                                     </select>
                                                   </div>
@@ -327,13 +327,9 @@
     function registerEmployee()
     {
         $(document).ready(function(){
-        var url = 'http://127.0.0.1:8000/api/employee';
-        var employee = $('input[name="idEmployee"]').val();
-        var value = employee;
-
-        
-            myRoomNumber = $('button[name="edit"]').attr('data-id'); 
-            console.log({
+        var url = 'https://typical-pipe-production.up.railway.app/api/employee';
+        var employee = $('input[name="idEmployee"]').val();          
+        var data =  {
              name: $('input[name="infoNameR"]').val(),
              lastname: $('input[name="infoLastnameR"]').val(), 
              identification: $('input[name="infoIdR"]').val(),
@@ -342,67 +338,47 @@
              city: $('select[name="infoCityR"]').val().toString(), 
              number: $('input[name="infoNumberR"]').val(),
              administrator: 0,
-            });
+            };
+            console.log(data);
         
 
         $.ajax({
             type:"POST",
             url: url,
-            data: 
-            {
-             name: $('input[name="infoNameR"]').val(),
-             lastname: $('input[name="infoLastnameR"]').val(), 
-             identification: $('input[name="infoIdR"]').val(),
-             country:$('select[name="infoCountryR"]').val().toString(),
-             address:$('input[name="infoAddressR"]').val(), 
-             city: $('select[name="infoCityR"]').val().toString(), 
-             number: $('input[name="infoNumberR"]').val(),
-             administrator: 0,
-            },
+            data: data,
             success: function(response) {
                 var result = '<p class=text-success> Registro exitoso! </p> <img src="images/gif/reloading.gif" alt="reloading" width="30" height="30" >'; 
                 $('div#message').append(result);
                 $("#btn_submit").css('visibility', 'hidden');
-                
                 setTimeout(function(){
                 window.location.reload();
                 }, 3000);
-                
             },
             error: function(){
                 var result = "<p class=text-danger> Error, compruebe los datos ingresados e intente nuevamente. </p>";
                 $('div#message').append(result);
-                console.log();
             },
         }); 
     })}   
 </script>
-
+@foreach ($employees as $information) 
 <script>
-    function deleteEmployee()
+    function deleteEmployee{{$information->id}}()
     {
         $(document).ready(function(){
-        var url = 'http://127.0.0.1:8000/api/employees/';
-        var employee = $('input[name="idEmployee"]').val();
-        var value = employee;
-
-        
-            myRoomNumber = $('button[name="edit"]').attr('data-id'); 
-            console.log($('select[name="infoCity"]').val().toString());
-        
+        var url = 'https://typical-pipe-production.up.railway.app/api/employees/';
+        var employee = $('input[name="idEmployee'+ {{$information->id}} +'"]').val();       
 
         $.ajax({
             type:"DELETE",
             url: url + employee,
             success: function(response) {
-                var result = ''; 
+                var result = '<p class=text-success> Se ha eliminado con éxito. </p> <img src="images/gif/reloading.gif" alt="reloading" width="30" height="30" >'; 
                 $('div#message').append(result);
-                $('#submit').attr('disabled', true);
-                
+                $("#btn_submit").css('visibility', 'hidden');
                 setTimeout(function(){
                 window.location.reload();
                 }, 3000);
-                
             },
             error: function(){
                 var result = "<p class=text-danger> Este empleado no puede ser eliminado. Posee varias jefaturas pendientes.</p>";
@@ -411,45 +387,36 @@
         }); 
     })}
 </script>
-
 <script>
-    function updateEmployee()
+    function updateEmployee{{$information->id}}()
     {
         $(document).ready(function(){
-        var url = 'http://127.0.0.1:8000/api/employees/';
-        var employee = $('input[name="idEmployee"]').val();
-        var value = employee;
-
-        
-            myRoomNumber = $('button[name="edit"]').attr('data-id'); 
-            console.log($('select[name="infoCity"]').val().toString());
-        
+        var url = 'https://typical-pipe-production.up.railway.app/api/employees/';
+        var employee = $('input[name="idEmployee'+ {{$information->id}} +'"]').val();
+        var data = {
+             id: employee,
+             name: $('input[name="infoName'+ employee +'"]').val(),
+             lastname: $('input[name="infoLastname'+ employee +'"]').val(), 
+             identification: $('input[name="infoId'+ employee +'"]').val(),
+             country:$('select[name="infoCountry'+ employee +'"]').val().toString(),
+             address:$('input[name="infoAddress'+ employee +'"]').val(), 
+             city: $('select[name="infoCity'+ employee +'"]').val().toString(), 
+             number: $('input[name="infoNumber'+ employee +'"]').val(),
+             administrator: $('input[name="infoAdmin'+ employee +'"]').val()
+            };
 
         $.ajax({
             type:"PUT",
             url: url + employee,
-            data: 
-            {
-             id: employee,
-             name: $('input[name="infoName"]').val(),
-             lastname: $('input[name="infoLastname"]').val(), 
-             identification: $('input[name="infoId"]').val(),
-             country:$('select[name="infoCountry"]').val().toString(),
-             address:$('input[name="infoAddress"]').val(), 
-             city: $('select[name="infoCity"]').val().toString(), 
-             number: $('input[name="infoNumber"]').val(),
-             administrator: $('input[name="infoAdmin"]').val()
-            },
+            data: data,
             dataType: 'JSON',
             success: function(response) {
                 var result = '<p class=text-success> Actualización exitosa. </p> <img src="images/gif/reloading.gif" alt="reloading" width="30" height="30" >'; 
                 $('div#message').append(result);
-                $('#submit').attr('disabled', true);
-                
+                $("#btn_submit").css('visibility', 'hidden');
                 setTimeout(function(){
                 window.location.reload();
                 }, 3000);
-                
             },
             error: function(){
                 var result = "<p class=text-danger> Error, compruebe los datos ingresados e intente nuevamente. </p>";
@@ -466,22 +433,22 @@ $(function() {
   cities['Colombia'] = new Array('Bogotá', 'Medellin', 'Cartagena', 'Otro');
   cities['España'] = new Array('Sevilla', 'Madrid', 'Barcelona', 'Otro');
 
-  $("#infoCountry").change(function() {
+  $('#infoCountry'+ {{$information->id}}).change(function() {
     var selected = [];
     $.each($(this).val(), function(i, country) {
       selected = selected.concat(cities[country]);
     });
 
-    $("#infoCity > option").remove();
+    $("#infoCity"+ {{$information->id}} +" > option").remove();
     if (selected.length === 0) {
     
-      $("#infoCity").append("<option disabled>Select Country First</option>");
+      $("#infoCity"+ {{$information->id}}).append("<option disabled>Select Country First</option>");
       return false;
     }
     selected.sort();
 
     $.each(selected, function(i, city) {
-      $("<option value='" + city + "'>").html(city).appendTo("#infoCity");
+      $("<option value='" + city + "'>").html(city).appendTo("#infoCity"+ {{$information->id}});
     });
   });
 });
@@ -516,4 +483,5 @@ $(function() {
     });
     
     </script>
+    @endforeach
 @endsection

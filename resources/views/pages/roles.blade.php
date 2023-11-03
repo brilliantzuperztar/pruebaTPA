@@ -82,7 +82,7 @@
                                               <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Nombre</label>
                                                 <div class="col-sm-9">
-                                                  <input type="text" class="form-control" name="infoName" value="{{$information->employee->name}}" disabled/>
+                                                  <input type="text" class="form-control" name="infoName{{$information->id}}" value="{{$information->employee->name}}" disabled/>
                                                 </div>
                                               </div>
                                             </div>
@@ -90,7 +90,7 @@
                                               <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Apellido</label>
                                                 <div class="col-sm-9">
-                                                  <input type="text" class="form-control" name="infoLastname" value="{{$information->employee->lastname}}" disabled/>
+                                                  <input type="text" class="form-control" name="infoLastname{{$information->id}}" value="{{$information->employee->lastname}}" disabled/>
                                                 </div>
                                               </div>
                                             </div>
@@ -100,7 +100,7 @@
                                                 <div class="form-group row">
                                                   <label class="col-sm-3 col-form-label">Identificación</label>
                                                   <div class="col-sm-9">
-                                                    <input type="text" class="form-control" name="infoId" value="{{$information->employee->identification}}" disabled/>
+                                                    <input type="text" class="form-control" name="infoId{{$information->id}}" value="{{$information->employee->identification}}" disabled/>
                                                   </div>
                                                 </div>
                                               </div>
@@ -108,8 +108,8 @@
                                                 <div class="form-group row">
                                                   <label class="col-sm-3 col-form-label">Cargo</label>
                                                   <div class="col-sm-9">
-                                                    <select class="form-control" id="infoPosition" name="infoPosition">
-                                                        <option value="{{$information->position->pos_name}}" disabled>{{$information->position->pos_name}}</option>
+                                                    <select class="form-control" name="infoPosition{{$information->id}}" required>
+                                                        @if(!empty($information->position->id))<option value="{{$information->position->id}}" selected="selected" required>{{$information->position->pos_name}}</option> @endif
     
                                                         @foreach($positions as $pos_name)
                                                             <option value="{{$pos_name->position->id}}" label="{{$pos_name->position->pos_name}}">{{$pos_name->position->pos_name}}</option>   
@@ -124,8 +124,8 @@
                                                 <div class="form-group row">
                                                   <label class="col-sm-3 col-form-label">Rol</label>
                                                   <div class="col-sm-9">
-                                                    <select class="form-control" id="infoRole" name="infoRole" multiple>
-                                                        <option value="{{$information->role}}" disabled>{{$information->role}}</option>
+                                                    <select class="form-control"  name="infoRole{{$information->id}}" multiple required>
+                                                      @if(!empty($information->role)) <option value="{{$information->role}}" selected="selected">{{$information->role}}</option>@endif
                                                         <option value="Jefe">Jefe</option>
                                                         <option value="Colaborador/a">Colaborador/a</option>
                                                     </select>
@@ -136,10 +136,10 @@
                                                 <div class="form-group row">
                                                   <label class="col-sm-3 col-form-label">Jefe</label>
                                                   <div class="col-sm-9">
-                                                    <select class="form-control" id="infoLeader" name="infoLeader" multiple>
-                                                        <option value="{{$information->id_leader}}" disabled>{{$information->leader->name}} {{$information->leader->lastname}}</option>
-                                                        @foreach($positions as $id_leader)
-                                                        <option value="{{$id_leader->id_leader}}" label="{{$id_leader->$id_leader}}">{{$id_leader->leader->name}} {{$id_leader->leader->lastname}}</option>
+                                                    <select class="form-control" name="infoLeader{{$information->id}}" multiple required>
+                                                        @if(!empty($information->id_leader)) <option value="{{$information->id_leader}}"  selected="selected" required>{{$information->leader->name}} {{$information->leader->lastname}} </option> @endif
+                                                        @foreach($employees as $leader)
+                                                        <option value="{{$leader->id}}" >{{$leader->name}} {{$leader->lastname}}</option>
                                                         @endforeach
                                                       </select>
                                                   </div>
@@ -147,7 +147,7 @@
                                               </div>
                                           </div>
                                           <div id="message" style="text-align:center"></div>
-                                          <input type="hidden" name="idPosition" value="{{$information->id}}" />
+                                          <input type="hidden" name="idPosition{{$information->id}}" value="{{$information->id}}" />
                                         </form>
                                       </div>
                                     </div>
@@ -155,7 +155,7 @@
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                              <input type="submit" id="btn_submit" value="Guardar" class="btn btn-primary" onclick="updatePosition()">
+                              <input type="submit" id="btn_submit" value="Guardar" class="btn btn-primary" onclick="updatePosition{{$information->id}}()">
                             </div>
                           </div>
                         </div>
@@ -176,10 +176,10 @@
                                   </blockquote>
                             </div>
                             <div id="message" style="text-align:center"></div>
-                            <input type="hidden" name="idPosition" value="{{$information->id}}" />
+                            <input type="hidden" name="idPosition{{$information->id}}" value="{{$information->id}}" />
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <button type="button" id="btn_submit" class="btn btn-primary" onclick="deletePosition()">Confirmar</button>
+                              <button type="button" id="btn_submit" class="btn btn-primary" onclick="deletePosition{{$information->id}}()">Confirmar</button>
                             </div>
                           </div>
                         </div>
@@ -278,6 +278,7 @@
         $('#position').DataTable();
     });
 </script>
+
 <script>
     function createPosition()
     {
@@ -319,13 +320,15 @@
         }); 
     })}
 </script>
+@foreach ($positions as $information)  
 <script>
-    function deletePosition()
+  
+    function deletePosition{{$information->id}}()
     {
-        $(document).ready(function(){
-        var url = 'http://127.0.0.1:8000/api/positions/';
-        var employee = $('input[name="idPosition"]').val();
-        var value = employee;        
+        $(document).ready(function() {
+        var url = 'https://typical-pipe-production.up.railway.app/api/positions/';
+        var employee = $('input[name="idPosition' + {{$information->id}} + '"]').val();      
+        console.log(employee);
 
         $.ajax({
             type:"DELETE",
@@ -348,18 +351,17 @@
 </script>
 
 <script>
-    function updatePosition()
+    function updatePosition{{$information->id}}()
     {
-        $(document).ready(function(){
-        var url = 'http://127.0.0.1:8000/api/positions/';
-        var employee = $('input[name="idPosition"]').val();
-        var value = employee;
-        console.log({
+        $(document).ready(function() { 
+        var url = 'https://typical-pipe-production.up.railway.app/api/positions/';
+        var employee = $('input[name="idPosition'+ {{$information->id}} +'"]').val();
+        var data = {
                 id_employee: employee,
-                id_position: $('select[name="infoPosition"]').val().toString(),
-                id_leader: $('select[name="infoLeader"]').val().toString(),
-                role: $('select[name="infoRole"]').val().toString(),
-            });
+                id_position: $('select[name="infoPosition'+ employee +'"]').val().toString(),
+                id_leader: $('select[name="infoLeader'+ employee +'"]').val().toString(),
+                role: $('select[name="infoRole'+ employee +'"]').val().toString(),
+            };     
     
         $.ajax({
             type:"PUT",
@@ -389,5 +391,6 @@
         }); 
     })}
 </script>
+@endforeach
 @endsection
 
