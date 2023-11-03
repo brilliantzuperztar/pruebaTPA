@@ -15,16 +15,19 @@ return new class extends Migration
             $table->id();
             
             $table->foreignId('id_employee')
+                ->nullable()            
                 ->constrained('employees')
                 ->cascadeOnDelete()
                 ->nullOnDelete();
 
             $table->foreignId('id_position')
+                ->nullable()
                 ->constrained('positions')
                 ->cascadeOnDelete()
                 ->nullOnDelete();
 
             $table->foreignId('id_leader')
+                ->nullable()
                 ->constrained('employees')
                 ->cascadeOnDelete()
                 ->nullOnDelete();
