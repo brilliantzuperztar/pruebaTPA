@@ -1,16 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+
 
 class EmployeeList extends Controller
 {
     
     public function view() 
     {
-        $employees = Employee::all();
-        return view("pages/employees", compact("employees"));
+        if ($user = Auth::user())
+        {  
+            $employees = Employee::all();
+            return view("pages/employees", compact("employees", "user"));
+        }
+        
+        return view("auth/login");
     }
     
     /**

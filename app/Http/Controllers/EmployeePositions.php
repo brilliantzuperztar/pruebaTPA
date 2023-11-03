@@ -1,17 +1,25 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\EmployeeInfo;
+use App\Models\Position;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class EmployeePositions extends Controller
 {
-    public function view() {
-    
-        $positions = EmployeeInfo::all();
-        return view("pages/roles", compact("positions"));
+    public function view() 
+    {
+        if($user = Auth::user())
+        {
+            $positions = EmployeeInfo::all();
+            $roles = Position::all();
+            $employees = Employee::all();
+            return view("pages/roles", compact("positions", "user", "roles", "employees"));
+        }
+        return view("auth/login"); 
     }
 
       /**

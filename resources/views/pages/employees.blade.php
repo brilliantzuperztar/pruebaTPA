@@ -369,6 +369,7 @@
         var url = 'https://typical-pipe-production.up.railway.app/api/employees/';
         var employee = $('input[name="idEmployee'+ {{$information->id}} +'"]').val();       
 
+
         $.ajax({
             type:"DELETE",
             url: url + employee,
@@ -392,6 +393,7 @@
     {
         $(document).ready(function(){
         var url = 'https://typical-pipe-production.up.railway.app/api/employees/';
+  
         var employee = $('input[name="idEmployee'+ {{$information->id}} +'"]').val();
         var data = {
              id: employee,
@@ -403,6 +405,7 @@
              city: $('select[name="infoCity'+ employee +'"]').val().toString(), 
              number: $('input[name="infoNumber'+ employee +'"]').val(),
              administrator: $('input[name="infoAdmin'+ employee +'"]').val()
+
             };
 
         $.ajax({

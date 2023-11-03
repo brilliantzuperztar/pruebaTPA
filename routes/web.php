@@ -16,14 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages/login'); 
-});
-
-Route::get('/home', function () {
-    return view('pages/home'); 
-});
-
 Route::get('/employees', [EmployeeList::class,'view']);
 Route::get('/positions', [EmployeePositions::class,'view'])->name('employees.info');
 
@@ -45,3 +37,16 @@ Route::controller(EmployeePositions::class)->group(function () {
     Route::delete('/positions/{id}', [EmployeePositions::class,'destroy']);
 });
 */
+Auth::routes();
+
+Route::get('/', [App\Http\Controllers\AuthManager::class, 'index'])->name('index');
+
+Auth::routes();
+
+Route::post('/login', [App\Http\Controllers\AuthManager::class, 'login'])->name('login');
+
+#Route::post('/login', [App\Http\Controllers\AuthManager::class, 'loginPost'])->name('login.post');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\AuthManager::class, 'index'])->name('home');

@@ -45,22 +45,22 @@
                     @foreach ($positions as $information)
                     <tr>           
                       <td class="py-1">
-                          {{$information->id}}
+                        @if(!empty($information->id)) {{$information->id}} @else {{ __('Sin información') }} @endif
                       </td>
                       <td>
-                          {{$information->employee->name}} {{$information->employee->lastname}}
+                          @if(!empty($information->employee->name)) {{$information->employee->name}} {{$information->employee->lastname}} @else {{ __('Usuario eliminado') }} @endif
                       </td>
                       <td>
-                          {{$information->employee->identification}}
+                          @if(!empty($information->employee->identification)) {{$information->employee->identification}} @else {{ __('Sin información') }} @endif
                       </td>
                       <td>
-                          {{$information->position->pos_name}}
+                        @if(!empty($information->position->pos_name)) {{$information->position->pos_name}} @else {{ __('Sin información') }} @endif
                       </td>
                       <td>
-                          {{$information->role}}
+                        @if(!empty($information->role)) {{$information->role}} @else {{ __('Sin información') }} @endif
                       </td>
                       <td>
-                          {{$information->leader->name}} {{$information->leader->lastname}}
+                        @if(!empty($information->leader->name)) {{$information->leader->name}} {{$information->leader->lastname}} @else {{ __('No aplica') }} @endif
                       </td>
                       <td><button type="button" name="edit" class="btn btn-primary" data-toggle="modal" data-id="{{$information->id}}" data-target="#updatePosition{{$information->id}}" >Actualizar</button>
                       <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deletePosition{{$information->id}}">Eliminar</button></td>
@@ -111,8 +111,8 @@
                                                     <select class="form-control" name="infoPosition{{$information->id}}" required>
                                                         @if(!empty($information->position->id))<option value="{{$information->position->id}}" selected="selected" required>{{$information->position->pos_name}}</option> @endif
     
-                                                        @foreach($positions as $pos_name)
-                                                            <option value="{{$pos_name->position->id}}" label="{{$pos_name->position->pos_name}}">{{$pos_name->position->pos_name}}</option>   
+                                                        @foreach($roles as $pos_name)
+                                                        <option value="{{$pos_name->id}}">{{$pos_name->pos_name}}</option>
                                                         @endforeach
                                                     </select>
                                                   </div>
@@ -203,8 +203,8 @@
                                                       <label class="col-sm-3 col-form-label">Nombre completo</label>
                                                       <div class="col-sm-9">
                                                         <select class="form-control" id="infoNameR" name="infoNameR" multiple>
-                                                            @foreach($positions as $name)
-                                                            <option value="{{$name->employee->id}}">{{$name->employee->name}} {{$name->employee->lastname}}</option>
+                                                            @foreach($employees as $employee)
+                                                            <option value="{{$employee->id}}">{{$employee->name}} {{$employee->lastname}}</option>
                                                             @endforeach
                                                           </select>
                                                       </div>
@@ -215,9 +215,8 @@
                                                   <label class="col-sm-3 col-form-label">Cargo</label>
                                                   <div class="col-sm-9">
                                                     <select class="form-control" id="infoPositionR" name="infoPositionR" multiple>
-                                                        <option value="{{$information->position->pos_name}}" disabled>{{$information->position->pos_name}}</option>
-                                                        @foreach($positions as $pos_name)
-                                                        <option value="{{$pos_name->position->id}}" label="{{$pos_name->position->pos_name}}">{{$pos_name->position->pos_name}}</option>
+                                                        @foreach($roles as $pos_name)
+                                                        <option value="{{$pos_name->id}}">{{$pos_name->pos_name}}</option>
                                                         @endforeach
                                                       </select>
                                                   </div>
@@ -241,9 +240,8 @@
                                                   <label class="col-sm-3 col-form-label">Jefe</label>
                                                   <div class="col-sm-9">
                                                     <select class="form-control" id="infoLeaderR" name="infoLeaderR" multiple>
-                                                        <option value="{{$information->id_leader}}" disabled>{{$information->leader->name}} {{$information->employee->lastname}}</option>
-                                                        @foreach($positions as $id_leader)
-                                                        <option value="{{$id_leader->id_leader}}" label="{{$id_leader->$id_leader}}">{{$id_leader->leader->name}} {{$id_leader->employee->lastname}}</option>
+                                                        @foreach($employees as $leader)
+                                                        <option value="{{$leader->id}}" >{{$leader->name}} {{$leader->lastname}}</option>
                                                         @endforeach
                                                       </select>
                                                   </div>
@@ -282,8 +280,8 @@
 <script>
     function createPosition()
     {
-        $(document).ready(function(){
-        var url = 'http://127.0.0.1:8000/api/position/';
+        $(document).ready(function() {
+        var url = 'https://typical-pipe-production.up.railway.app/api/position/';
         var employee = $('input[name="idPosition"]').val();
         var value = employee;
         console.log({
@@ -329,7 +327,6 @@
         var url = 'https://typical-pipe-production.up.railway.app/api/positions/';
         var employee = $('input[name="idPosition' + {{$information->id}} + '"]').val();      
         console.log(employee);
-
         $.ajax({
             type:"DELETE",
             url: url + employee,
@@ -349,7 +346,6 @@
         }); 
     })}
 </script>
-
 <script>
     function updatePosition{{$information->id}}()
     {
@@ -366,23 +362,15 @@
         $.ajax({
             type:"PUT",
             url: url + employee,
-            data: 
-            {
-                id_employee: employee,
-                id_position: $('select[name="infoPosition"]').val().toString(),
-                id_leader: $('select[name="infoLeader"]').val().toString(),
-                role: $('select[name="infoRole"]').val().toString(),
-            },
+            data: data, 
             dataType: 'JSON',
             success: function(response) {
                 var result = '<p class=text-success> Actualización exitosa. </p> <img src="images/gif/reloading.gif" alt="reloading" width="30" height="30" >'; 
                 $('div#message').append(result);
                 $("#btn_submit").css('visibility', 'hidden');
-                
                 setTimeout(function(){
                 window.location.reload();
-                }, 3000);
-                
+                }, 3000);      
             },
             error: function(){
                 var result = "<p class=text-danger> Error, compruebe los datos ingresados e intente nuevamente. </p>";
