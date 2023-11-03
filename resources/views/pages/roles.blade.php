@@ -279,7 +279,7 @@
 <script>
     function createPosition()
     {
-        $(document).ready(function(){
+        $(document).ready(function() {
         var url = 'https://typical-pipe-production.up.railway.app/api/position/';
         var employee = $('input[name="idPosition"]').val();
         var value = employee;
@@ -320,7 +320,7 @@
 <script>
     function deletePosition()
     {
-        $(document).ready(function(){
+        $(document).ready(function() {
         var url = 'https://typical-pipe-production.up.railway.app/api/positions/';
         var employee = $('input[name="idPosition"]').val();
         var value = employee;        
@@ -344,41 +344,31 @@
         }); 
     })}
 </script>
-
 <script>
     function updatePosition()
     {
-        $(document).ready(function(){
+        $(document).ready(function() { 
         var url = 'https://typical-pipe-production.up.railway.app/api/positions/';
         var employee = $('input[name="idPosition"]').val();
-        var value = employee;
-        console.log({
+        var data = {
                 id_employee: employee,
                 id_position: $('select[name="infoPosition"]').val().toString(),
                 id_leader: $('select[name="infoLeader"]').val().toString(),
                 role: $('select[name="infoRole"]').val().toString(),
-            });
+            };     
     
         $.ajax({
             type:"PUT",
             url: url + employee,
-            data: 
-            {
-                id_employee: employee,
-                id_position: $('select[name="infoPosition"]').val().toString(),
-                id_leader: $('select[name="infoLeader"]').val().toString(),
-                role: $('select[name="infoRole"]').val().toString(),
-            },
+            data: data, 
             dataType: 'JSON',
             success: function(response) {
                 var result = '<p class=text-success> Actualización exitosa. </p> <img src="images/gif/reloading.gif" alt="reloading" width="30" height="30" >'; 
                 $('div#message').append(result);
                 $("#btn_submit").css('visibility', 'hidden');
-                
                 setTimeout(function(){
                 window.location.reload();
-                }, 3000);
-                
+                }, 3000);      
             },
             error: function(){
                 var result = "<p class=text-danger> Error, compruebe los datos ingresados e intente nuevamente. </p>";
