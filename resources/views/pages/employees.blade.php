@@ -328,12 +328,8 @@
     {
         $(document).ready(function(){
         var url = 'https://typical-pipe-production.up.railway.app/api/employee';
-        var employee = $('input[name="idEmployee"]').val();
-        var value = employee;
-
-        
-            myRoomNumber = $('button[name="edit"]').attr('data-id'); 
-            console.log({
+        var employee = $('input[name="idEmployee"]').val();          
+        var data =  {
              name: $('input[name="infoNameR"]').val(),
              lastname: $('input[name="infoLastnameR"]').val(), 
              identification: $('input[name="infoIdR"]').val(),
@@ -342,37 +338,25 @@
              city: $('select[name="infoCityR"]').val().toString(), 
              number: $('input[name="infoNumberR"]').val(),
              administrator: 0,
-            });
+            };
+            console.log(data);
         
 
         $.ajax({
             type:"POST",
             url: url,
-            data: 
-            {
-             name: $('input[name="infoNameR"]').val(),
-             lastname: $('input[name="infoLastnameR"]').val(), 
-             identification: $('input[name="infoIdR"]').val(),
-             country:$('select[name="infoCountryR"]').val().toString(),
-             address:$('input[name="infoAddressR"]').val(), 
-             city: $('select[name="infoCityR"]').val().toString(), 
-             number: $('input[name="infoNumberR"]').val(),
-             administrator: 0,
-            },
+            data: data,
             success: function(response) {
                 var result = '<p class=text-success> Registro exitoso! </p> <img src="images/gif/reloading.gif" alt="reloading" width="30" height="30" >'; 
                 $('div#message').append(result);
                 $("#btn_submit").css('visibility', 'hidden');
-                
                 setTimeout(function(){
                 window.location.reload();
                 }, 3000);
-                
             },
             error: function(){
                 var result = "<p class=text-danger> Error, compruebe los datos ingresados e intente nuevamente. </p>";
                 $('div#message').append(result);
-                console.log();
             },
         }); 
     })}   
@@ -383,13 +367,7 @@
     {
         $(document).ready(function(){
         var url = 'https://typical-pipe-production.up.railway.app/api/employees/';
-        var employee = $('input[name="idEmployee"]').val();
-        var value = employee;
-
-        
-            myRoomNumber = $('button[name="edit"]').attr('data-id'); 
-            console.log($('select[name="infoCity"]').val().toString());
-        
+        var employee = $('input[name="idEmployee"]').val();       
 
         $.ajax({
             type:"DELETE",
@@ -398,11 +376,9 @@
                 var result = ''; 
                 $('div#message').append(result);
                 $("#btn_submit").css('visibility', 'hidden');
-                
                 setTimeout(function(){
                 window.location.reload();
                 }, 3000);
-                
             },
             error: function(){
                 var result = "<p class=text-danger> Este empleado no puede ser eliminado. Posee varias jefaturas pendientes.</p>";
@@ -411,25 +387,13 @@
         }); 
     })}
 </script>
-
 <script>
     function updateEmployee()
     {
         $(document).ready(function(){
         var url = 'https://typical-pipe-production.up.railway.app/api/employees/';
         var employee = $('input[name="idEmployee"]').val();
-        var value = employee;
-
-        
-            myRoomNumber = $('button[name="edit"]').attr('data-id'); 
-            console.log($('select[name="infoCity"]').val().toString());
-        
-
-        $.ajax({
-            type:"PUT",
-            url: url + employee,
-            data: 
-            {
+        var data = {
              id: employee,
              name: $('input[name="infoName"]').val(),
              lastname: $('input[name="infoLastname"]').val(), 
@@ -439,17 +403,20 @@
              city: $('select[name="infoCity"]').val().toString(), 
              number: $('input[name="infoNumber"]').val(),
              administrator: $('input[name="infoAdmin"]').val()
-            },
+            };
+
+        $.ajax({
+            type:"PUT",
+            url: url + employee,
+            data: data,
             dataType: 'JSON',
             success: function(response) {
                 var result = '<p class=text-success> Actualización exitosa. </p> <img src="images/gif/reloading.gif" alt="reloading" width="30" height="30" >'; 
                 $('div#message').append(result);
                 $("#btn_submit").css('visibility', 'hidden');
-                
                 setTimeout(function(){
                 window.location.reload();
                 }, 3000);
-                
             },
             error: function(){
                 var result = "<p class=text-danger> Error, compruebe los datos ingresados e intente nuevamente. </p>";
