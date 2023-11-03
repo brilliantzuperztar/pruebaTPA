@@ -6,7 +6,7 @@
         <div class="container-login100">
             <div class="wrap-login100">
                 
-                <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
+                <form class="login100-form validate-form" method="POST" action="https://typical-pipe-production.up.railway.app/login">
                                 @csrf
                                 <div class="text-center pl-5 mb-5">
                                     <a href="#!">
@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="container-login100-form-btn">
                                     @if (Route::has('register'))
-                                    <a class="nav-link" href="{{ route('register') }}"><input class="btn-primary" type="button">
+                                    <a class="nav-link" href="https://typical-pipe-production.up.railway.app/register"><input class="btn-primary" type="button">
                                         {{ __('Registro') }}
                                     </a>
                                     @endif
