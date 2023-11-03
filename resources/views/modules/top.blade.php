@@ -18,13 +18,13 @@
               <i class="ti-settings text-primary"></i>
               Configuración
             </a>
-            <a class="dropdown-item" ref="{{ route('logout') }}"
+            <a class="dropdown-item" ref="https://typical-pipe-production.up.railway.app/logout"
             onclick="event.preventDefault();
                           document.getElementById('logout-form').submit();">
               <i class="ti-power-off text-primary"></i>
               Cerrar Sesión
             </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            <form id="logout-form" action="https://typical-pipe-production.up.railway.app/logout" method="POST" class="d-none">
                 @csrf
             </form>
           </div>
