@@ -57,7 +57,7 @@
                         @if(!empty($information->position->pos_name)) {{$information->position->pos_name}} @else {{ __('Sin información') }} @endif
                       </td>
                       <td>
-                        @if(!empty($information->role)) {{$information->role}} @else No info {{ __('Sin información') }} @endif
+                        @if(!empty($information->role)) {{$information->role}} @else {{ __('Sin información') }} @endif
                       </td>
                       <td>
                         @if(!empty($information->leader->name)) {{$information->leader->name}} {{$information->leader->lastname}} @else {{ __('No aplica') }} @endif
@@ -108,7 +108,7 @@
                                                 <div class="form-group row">
                                                   <label class="col-sm-3 col-form-label">Cargo</label>
                                                   <div class="col-sm-9">
-                                                    <select class="form-control" id="infoPosition" name="infoPosition">
+                                                    <select class="form-control" id="infoPosition" name="infoPosition" required>
                                                         @if(!empty($information->position->id))<option value="{{$information->position->id}}" selected="selected" required>{{$information->position->pos_name}}</option> @endif
     
                                                         @foreach($roles as $pos_name)
@@ -124,7 +124,7 @@
                                                 <div class="form-group row">
                                                   <label class="col-sm-3 col-form-label">Rol</label>
                                                   <div class="col-sm-9">
-                                                    <select class="form-control" id="infoRole" name="infoRole" multiple>
+                                                    <select class="form-control" id="infoRole" name="infoRole" multiple required>
                                                       @if(!empty($information->role)) <option value="{{$information->role}}" selected="selected">{{$information->role}}</option>@endif
                                                         <option value="Jefe">Jefe</option>
                                                         <option value="Colaborador/a">Colaborador/a</option>
@@ -136,7 +136,7 @@
                                                 <div class="form-group row">
                                                   <label class="col-sm-3 col-form-label">Jefe</label>
                                                   <div class="col-sm-9">
-                                                    <select class="form-control" id="infoLeader" name="infoLeader" multiple>
+                                                    <select class="form-control" id="infoLeader" name="infoLeader" multiple required>
                                                         @if(!empty($information->id_leader)) <option value="{{$information->id_leader}}"  selected="selected" required>{{$information->leader->name}} {{$information->leader->lastname}} </option> @endif
                                                         @foreach($employees as $leader)
                                                         <option value="{{$leader->id}}" >{{$leader->name}} {{$leader->lastname}}</option>
