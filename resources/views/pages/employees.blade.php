@@ -63,7 +63,7 @@
                         @if(!empty($information->country)) {{$information->country}} @else {{ __('Sin información') }} @endif
                       </td>
                       <td>
-                        @if(!empty($information->cit)) {{$information->city}} @else {{ __('Sin información') }} @endif
+                        @if(!empty($information->city)) {{$information->city}} @else {{ __('Sin información') }} @endif
                       </td>
                       <td>
                         @if(!empty($information->address)) {{$information->address}} @else {{ __('Sin información') }} @endif
@@ -99,7 +99,7 @@
                                               <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Nombre</label>
                                                 <div class="col-sm-9">
-                                                  <input type="text" class="form-control" name="infoName" value="{{$information->name}}"/>
+                                                  <input type="text" class="form-control" name="infoName" value="{{$information->name}}" required/>
                                                 </div>
                                               </div>
                                             </div>
@@ -107,7 +107,7 @@
                                               <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Apellido</label>
                                                 <div class="col-sm-9">
-                                                  <input type="text" class="form-control" name="infoLastname" value="{{$information->lastname}}"/>
+                                                  <input type="text" class="form-control" name="infoLastname" value="{{$information->lastname}}" required/>
                                                 </div>
                                               </div>
                                             </div>
@@ -117,7 +117,7 @@
                                                 <div class="form-group row">
                                                   <label class="col-sm-3 col-form-label">Identificación</label>
                                                   <div class="col-sm-9">
-                                                    <input type="text" class="form-control" name="infoId" value="{{$information->identification}}"/>
+                                                    <input type="text" class="form-control" name="infoId" value="{{$information->identification}}" required/>
                                                   </div>
                                                 </div>
                                               </div>
@@ -125,7 +125,7 @@
                                                 <div class="form-group row">
                                                   <label class="col-sm-3 col-form-label">Teléfono</label>
                                                   <div class="col-sm-9">
-                                                    <input type="text" class="form-control" name="infoNumber" value="{{$information->number}}"/>
+                                                    <input type="text" class="form-control" name="infoNumber" value="{{$information->number}}" required/>
                                                   </div>
                                                 </div>
                                               </div>
@@ -138,7 +138,7 @@
                                               <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">País</label>
                                                 <div class="col-sm-9">
-                                                  <select class="form-control" id="infoCountry" name="infoCountry" multiple>
+                                                  <select class="form-control" id="infoCountry" name="infoCountry" multiple required>
                                                     <option value="{{$information->country}}" selected>{{$information->country}}</option>
                                                     <option value="Colombia" label="Colombia">Colombia</option>
                                                     <option value="USA" label="USA">USA</option>
@@ -162,7 +162,7 @@
                                                 <div class="form-group row">
                                                   <label class="col-sm-3 col-form-label">Dirección</label>
                                                   <div class="col-sm-9">
-                                                    <input type="text" class="form-control" name="infoAddress" value="{{$information->address}}"/>
+                                                    <input type="text" class="form-control" name="infoAddress" value="{{$information->address}}" required/>
                                                   </div>
                                                 </div>
                                               </div>
@@ -225,7 +225,7 @@
                                               <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Nombre</label>
                                                 <div class="col-sm-9">
-                                                  <input type="text" class="form-control" name="infoNameR" />
+                                                  <input type="text" class="form-control" name="infoNameR" required />
                                                 </div>
                                               </div>
                                             </div>
@@ -233,7 +233,7 @@
                                               <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Apellido</label>
                                                 <div class="col-sm-9">
-                                                  <input type="text" class="form-control" name="infoLastnameR" />
+                                                  <input type="text" class="form-control" name="infoLastnameR" required />
                                                 </div>
                                               </div>
                                             </div>
@@ -243,7 +243,7 @@
                                                 <div class="form-group row">
                                                   <label class="col-sm-3 col-form-label">Identificación</label>
                                                   <div class="col-sm-9">
-                                                    <input type="text" class="form-control" name="infoIdR" />
+                                                    <input type="text" class="form-control" name="infoIdR" required />
                                                   </div>
                                                 </div>
                                               </div>
@@ -251,7 +251,7 @@
                                                 <div class="form-group row">
                                                   <label class="col-sm-3 col-form-label">Teléfono</label>
                                                   <div class="col-sm-9">
-                                                    <input type="text" class="form-control" name="infoNumberR" />
+                                                    <input type="text" class="form-control" name="infoNumberR" required />
                                                   </div>
                                                 </div>
                                               </div>
@@ -264,7 +264,7 @@
                                               <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">País</label>
                                                 <div class="col-sm-9">
-                                                  <select class="form-control" id="infoCountryR" name="infoCountryR" multiple>
+                                                  <select class="form-control" id="infoCountryR" name="infoCountryR" multiple required>
                                                     <option value="Colombia" label="Colombia">Colombia</option>
                                                     <option value="USA" label="USA">USA</option>
                                                     <option value="España" label="España">España</option>
