@@ -109,7 +109,7 @@
                                                   <label class="col-sm-3 col-form-label">Cargo</label>
                                                   <div class="col-sm-9">
                                                     <select class="form-control" id="infoPosition" name="infoPosition">
-                                                        <option value="{{$information->position->id}}" selected="selected" required>{{$information->position->pos_name}}</option>
+                                                        @if(!empty($information->position->id))<option value="{{$information->position->id}}" selected="selected" required>{{$information->position->pos_name}}</option>
     
                                                         @foreach($roles as $pos_name)
                                                         <option value="{{$pos_name->id}}">{{$pos_name->pos_name}}</option>
@@ -125,7 +125,7 @@
                                                   <label class="col-sm-3 col-form-label">Rol</label>
                                                   <div class="col-sm-9">
                                                     <select class="form-control" id="infoRole" name="infoRole" multiple>
-                                                        <option value="{{$information->role}}" selected="selected">{{$information->role}}</option>
+                                                      @if(!empty($information->role)) <option value="{{$information->role}}" selected="selected">{{$information->role}}</option>
                                                         <option value="Jefe">Jefe</option>
                                                         <option value="Colaborador/a">Colaborador/a</option>
                                                     </select>
@@ -137,7 +137,7 @@
                                                   <label class="col-sm-3 col-form-label">Jefe</label>
                                                   <div class="col-sm-9">
                                                     <select class="form-control" id="infoLeader" name="infoLeader" multiple>
-                                                        <option value="{{$information->id_leader}}"  selected="selected" required>{{$information->leader->name}} {{$information->leader->lastname}}</option>
+                                                        @if(!empty($information->id_leader)) <option value="{{$information->id_leader}}"  selected="selected" required>{{$information->leader->name}} {{$information->leader->lastname}} </option>
                                                         @foreach($employees as $leader)
                                                         <option value="{{$leader->id}}" >{{$leader->name}} {{$leader->lastname}}</option>
                                                         @endforeach
