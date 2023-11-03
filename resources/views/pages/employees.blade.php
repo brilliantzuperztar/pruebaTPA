@@ -51,28 +51,28 @@
                     @foreach ($employees as $information)   
                     <tr>
                       <td class="py-1">
-                          {{$information->id}}
+                        @if(!empty($information->id)) {{$information->id}} @else @endif
                       </td>
                       <td>
-                          {{$information->name}}  {{$information->lastname}}
+                        @if(!empty($information->name) && !empty($information->lastname)) {{$information->name}} {{$information->lastname}} @else {{ __('Sin información') }} @endif 
                       </td>
                       <td>
-                          {{$information->identification}}
+                        @if(!empty($information->identification)) {{$information->identification}} @else {{ __('Sin información') }} @endif
                       </td>
                       <td>
-                          {{$information->country}}
+                        @if(!empty($information->country)) {{$information->country}} @else {{ __('Sin información') }} @endif
                       </td>
                       <td>
-                          {{$information->city}}
+                        @if(!empty($information->cit)) {{$information->city}} @else {{ __('Sin información') }} @endif
                       </td>
                       <td>
-                          {{$information->address}}
+                        @if(!empty($information->address)) {{$information->address}} @else {{ __('Sin información') }} @endif
                       </td>
                       <td>
-                          {{$information->number}}
+                        @if(!empty($information->number)) {{$information->number}} @else {{ __('Sin información') }} @endif
                       </td>
                       <td>
-                          @if ($information->administrator === 1)
+                          @if (!empty($information->administrator) && $information->administrator === 1)
                           Sí
                           @else
                           No
@@ -139,7 +139,7 @@
                                                 <label class="col-sm-3 col-form-label">País</label>
                                                 <div class="col-sm-9">
                                                   <select class="form-control" id="infoCountry" name="infoCountry" multiple>
-                                                    <option value="{{$information->country}}" disabled>{{$information->country}}</option>
+                                                    <option value="{{$information->country}}" selected>{{$information->country}}</option>
                                                     <option value="Colombia" label="Colombia">Colombia</option>
                                                     <option value="USA" label="USA">USA</option>
                                                     <option value="España" label="España">España</option>
@@ -152,7 +152,7 @@
                                                 <div class="form-group row">
                                                   <label class="col-sm-3 col-form-label">Ciudad</label>
                                                   <div class="col-sm-9">
-                                                    <select class="form-control" id="infoCity" name="infoCity" multiple>
+                                                    <select class="form-control" id="infoCity" name="infoCity" multiple required>
                                                         <option disabled>Selecciona tu país primero</option>
                                                     </select>
                                                   </div>
@@ -277,7 +277,7 @@
                                                 <div class="form-group row">
                                                   <label class="col-sm-3 col-form-label">Ciudad</label>
                                                   <div class="col-sm-9">
-                                                    <select class="form-control" id="infoCityR" name="infoCityR" multiple>
+                                                    <select class="form-control" id="infoCityR" name="infoCityR" multiple required>
                                                         <option disabled>Selecciona tu país primero</option>
                                                     </select>
                                                   </div>

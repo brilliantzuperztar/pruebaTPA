@@ -45,22 +45,22 @@
                     @foreach ($positions as $information)
                     <tr>           
                       <td class="py-1">
-                          {{$information->id}}
+                        @if(!empty($information->id)) {{$information->id}} @else {{ __('Sin información') }} @endif
                       </td>
                       <td>
-                          {{$information->employee->name}} {{$information->employee->lastname}}
+                          @if(!empty($information->employee->name)) {{$information->employee->name}} {{$information->employee->lastname}} @else {{ __('Usuario eliminado') }} @endif
                       </td>
                       <td>
-                          {{$information->employee->identification}}
+                          @if(!empty($information->employee->identification)) {{$information->employee->identification}} @else {{ __('Sin información') }} @endif
                       </td>
                       <td>
-                          {{$information->position->pos_name}}
+                        @if(!empty($information->position->pos_name)) {{$information->position->pos_name}} @else {{ __('Sin información') }} @endif
                       </td>
                       <td>
-                          {{$information->role}}
+                        @if(!empty($information->role)) {{$information->role}} @else No info {{ __('Sin información') }} @endif
                       </td>
                       <td>
-                          {{$information->leader->name}} {{$information->leader->lastname}}
+                        @if(!empty($information->leader->name)) {{$information->leader->name}} {{$information->leader->lastname}} @else {{ __('No aplica') }} @endif
                       </td>
                       <td><button type="button" name="edit" class="btn btn-primary" data-toggle="modal" data-id="{{$information->id}}" data-target="#updatePosition{{$information->id}}" >Actualizar</button>
                       <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deletePosition{{$information->id}}">Eliminar</button></td>
@@ -109,7 +109,7 @@
                                                   <label class="col-sm-3 col-form-label">Cargo</label>
                                                   <div class="col-sm-9">
                                                     <select class="form-control" id="infoPosition" name="infoPosition">
-                                                        <option value="{{$information->position->pos_name}}" disabled>{{$information->position->pos_name}}</option>
+                                                        <option value="{{$information->position->id}}" selected="selected" required>{{$information->position->pos_name}}</option>
     
                                                         @foreach($roles as $pos_name)
                                                         <option value="{{$pos_name->id}}">{{$pos_name->pos_name}}</option>
@@ -125,7 +125,7 @@
                                                   <label class="col-sm-3 col-form-label">Rol</label>
                                                   <div class="col-sm-9">
                                                     <select class="form-control" id="infoRole" name="infoRole" multiple>
-                                                        <option value="{{$information->role}}" disabled>{{$information->role}}</option>
+                                                        <option value="{{$information->role}}" selected="selected">{{$information->role}}</option>
                                                         <option value="Jefe">Jefe</option>
                                                         <option value="Colaborador/a">Colaborador/a</option>
                                                     </select>
@@ -137,7 +137,7 @@
                                                   <label class="col-sm-3 col-form-label">Jefe</label>
                                                   <div class="col-sm-9">
                                                     <select class="form-control" id="infoLeader" name="infoLeader" multiple>
-                                                        <option value="{{$information->id_leader}}" disabled>{{$information->leader->name}} {{$information->leader->lastname}}</option>
+                                                        <option value="{{$information->id_leader}}"  selected="selected" required>{{$information->leader->name}} {{$information->leader->lastname}}</option>
                                                         @foreach($employees as $leader)
                                                         <option value="{{$leader->id}}" >{{$leader->name}} {{$leader->lastname}}</option>
                                                         @endforeach
