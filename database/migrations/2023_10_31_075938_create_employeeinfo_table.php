@@ -17,20 +17,17 @@ return new class extends Migration
             $table->foreignId('id_employee')
                 ->nullable()            
                 ->constrained('employees')
-                ->cascadeOnDelete()
-                ->nullOnDelete();
+                ->cascadeOnDelete();
 
             $table->foreignId('id_position')
                 ->nullable()
                 ->constrained('positions')
-                ->cascadeOnDelete()
-                ->nullOnDelete();
+                ->cascadeOnDelete();
 
             $table->foreignId('id_leader')
                 ->nullable()
                 ->constrained('employees')
-                ->cascadeOnDelete()
-                ->nullOnDelete();
+                ->cascadeOnDelete();
 
             $table->string('role')->nullable();
             $table->timestamp('updated_at')->nullable();
